@@ -3,6 +3,7 @@ package com.lafin.tiltheend.util;
 import com.lafin.tiltheend.thirdparty.notion.dto.DatabaseResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.PageResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.Request;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +19,9 @@ import java.util.Objects;
 @Component
 public class RestTemplateUtil<REQ extends Request,RESP> {
 
+    @Value("${notion.secret}")
+    private String appSecret;
+
     public PageResponse getCall(String url, REQ parameters) {
         var uriComponentsBuilder = UriComponentsBuilder.fromUriString(url);
 
@@ -29,7 +33,7 @@ public class RestTemplateUtil<REQ extends Request,RESP> {
 
         var headers = new HttpHeaders();
         headers.set("Notion-Version", "2021-05-13");
-        headers.set("Authorization", "Bearer secret_77baON5R7Zv6wJ46jt4AWWneXNlRB4PQKpaf0RvNA0S");
+        headers.set("Authorization", "Bearer " + appSecret);
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         var httpEntity = new HttpEntity<>(headers);
