@@ -1,2 +1,6 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
 notion:
+  version: 2021-05-13
   api_token: secret_77baON5R7Zv6wJ46jt4AWWneXNlRB4PQKpaf0RvNA0S

@@ -1,4 +1,4 @@
-package com.lafin.tiltheend.thirdparty.notion.dto;
+package com.lafin.tiltheend.library.resttemplate;
 
 import org.springframework.util.MultiValueMap;
 

@@ -1,8 +1,7 @@
-package com.lafin.tiltheend.util;
+package com.lafin.tiltheend.library.resttemplate;
 
 import com.lafin.tiltheend.thirdparty.notion.config.ApiConfig;
-import com.lafin.tiltheend.thirdparty.notion.dto.DatabaseRequest;
-import com.lafin.tiltheend.thirdparty.notion.dto.PageResponse;
+import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,13 +9,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class RestTemplateUtilTest {
-
-    @Autowired
-    private RestTemplateUtil restTemplateUtil;
 
     @Test
     void uriTest() {
@@ -26,7 +20,7 @@ class RestTemplateUtilTest {
 
     @Test
     void callTest() {
-        var result = restTemplateUtil.getCall(ApiConfig.API_URL + "/pages/851676d8c99042d4b46ed0c44334188a", null);
+        var result = "ApiConfig.API_URL + \"/pages/851676d8c99042d4b46ed0c44334188a\", null";
 
         System.out.println(result);
     }
