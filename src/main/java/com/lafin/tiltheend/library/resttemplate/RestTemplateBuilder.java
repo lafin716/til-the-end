@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -36,6 +37,8 @@ public class RestTemplateBuilder {
     private RequestEntity<?> requestEntity;
 
     private Class<?> response;
+
+    private ParameterizedTypeReference<?> genericResponse;
 
     private ResponseEntity<?> responseEntity;
 
@@ -92,6 +95,11 @@ public class RestTemplateBuilder {
 
     public RestTemplateBuilder response(Class<?> response) {
         this.response = response;
+        return this;
+    }
+
+    public RestTemplateBuilder response(ParameterizedTypeReference<?> response) {
+        this.genericResponse = response;
         return this;
     }
 
