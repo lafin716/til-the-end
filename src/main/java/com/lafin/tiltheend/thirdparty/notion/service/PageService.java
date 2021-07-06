@@ -4,7 +4,9 @@ import com.lafin.tiltheend.thirdparty.notion.config.ApiConfig;
 import com.lafin.tiltheend.thirdparty.notion.config.ApiType;
 import com.lafin.tiltheend.thirdparty.notion.constant.DatabaseApi;
 import com.lafin.tiltheend.thirdparty.notion.constant.PageApi;
+import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseParent;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseRequest;
+import com.lafin.tiltheend.thirdparty.notion.dto.request.PageParent;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.PageRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.DatabaseResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.PageResponse;
@@ -57,7 +59,7 @@ public class PageService extends NotionService {
      * The response may contain fewer than page_size of results.
      * @param pageRequest
      */
-    public PageResponse createFromDatabase(PageRequest pageRequest) {
+    public PageResponse createFromDatabase(PageRequest<DatabaseParent> pageRequest) {
         return (PageResponse) restTemplateBuilder.url(ApiConfig.API_URL)
                 .method(HttpMethod.POST)
                 .path(PageApi.CREATE)
@@ -75,7 +77,7 @@ public class PageService extends NotionService {
      * The response may contain fewer than page_size of results.
      * @param pageRequest
      */
-    public PageResponse createFromPage(PageRequest pageRequest) {
+    public PageResponse createFromPage(PageRequest<PageParent> pageRequest) {
         return (PageResponse) restTemplateBuilder.url(ApiConfig.API_URL)
                 .method(HttpMethod.POST)
                 .path(PageApi.CREATE)
@@ -88,21 +90,22 @@ public class PageService extends NotionService {
     }
 
     /**
-     * Listing the notion databases
-     * ! This endpoint is no longer recommended, use `search` instead.
-     * ! This endpoint will only return explicitly shared pages.
-     * @param startCursor
-     * @param pageSize
+     * Updates page property values for the specified page. Properties that are not set via the properties parameter will remain unchanged.
+     * If the parent is a database, the new property values in the properties parameter must conform to the parent database's property schema.
+     * Returns a 200 HTTP response containing the updated page object on success.
+     * Requests and responses contains page properties, not page content. To fetch page content, use the retrieve block children endpoint. To append page content, use the append block children endpoint.
+     * @param pageId
+     * @param pageRequest
      */
-    public DatabaseResponse list(String startCursor, int pageSize) {
-        return (DatabaseResponse) restTemplateBuilder.url(ApiConfig.API_URL)
+    public PageResponse update(String pageId, PageRequest pageRequest) {
+        return (PageResponse) restTemplateBuilder.url(ApiConfig.API_URL)
                 .method(HttpMethod.GET)
-                .path(DatabaseApi.LIST)
+                .path(PageApi.UPDATE)
+                .pathExpend(pageId)
                 .contentType(defaultContentType)
                 .headers(defaultHeaders)
-                .query("start_cursor", startCursor)
-                .query("page_size", String.valueOf(pageSize))
-                .response(DatabaseResponse.class)
+                .request(pageRequest)
+                .response(PageResponse.class)
                 .build()
                 .getBody();
     }

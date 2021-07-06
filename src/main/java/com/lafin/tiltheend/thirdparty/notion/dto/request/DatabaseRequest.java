@@ -16,20 +16,36 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class DatabaseRequest implements Request {
-    private String startCursor = "";
-    private int pageSize;
+public class DatabaseRequest extends PaginationRequest implements Request {
+
     private Filter filter;
+
     private Sort sort;
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Filter {
+
         private String property;
+
         private Map<String, Object> filter;
+
     }
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Sort {
+
         private String property;
+
         private TimeStamp timestamp;
+
         private Direction direction;
 
         public enum TimeStamp {
@@ -45,10 +61,6 @@ public class DatabaseRequest implements Request {
 
     @Override
     public MultiValueMap<String, String> toQueryParameters() {
-        var map = new LinkedMultiValueMap<String, String>();
-        map.add("start_cursor", startCursor);
-        map.add("page_size", String.valueOf(pageSize));
-
-        return map;
+        return null;
     }
 }
