@@ -11,6 +11,7 @@ import com.lafin.tiltheend.thirdparty.notion.dto.request.PageRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.DatabaseResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.PageResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class PageService extends NotionService {
      * The response may contain fewer than page_size of results.
      * @param pageRequest
      */
-    public PageResponse createFromDatabase(PageRequest<DatabaseParent> pageRequest) {
+    public PageResponse createFromDatabase(PageRequest pageRequest) {
         return (PageResponse) restTemplateBuilder.url(ApiConfig.API_URL)
                 .method(HttpMethod.POST)
                 .path(PageApi.CREATE)
@@ -77,7 +78,7 @@ public class PageService extends NotionService {
      * The response may contain fewer than page_size of results.
      * @param pageRequest
      */
-    public PageResponse createFromPage(PageRequest<PageParent> pageRequest) {
+    public PageResponse createFromPage(PageRequest pageRequest) {
         return (PageResponse) restTemplateBuilder.url(ApiConfig.API_URL)
                 .method(HttpMethod.POST)
                 .path(PageApi.CREATE)

@@ -9,7 +9,9 @@ import com.lafin.tiltheend.thirdparty.notion.dto.request.PageRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.BlockResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.DatabaseResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.PageResponse;
+import com.lafin.tiltheend.thirdparty.notion.dto.response.PaginationResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +25,15 @@ public class BlockService extends NotionService {
      * Retrieves a Page object using the ID specified.
      * @param blockId
      */
-    public BlockResponse retrieve(String blockId) {
-        return (BlockResponse) restTemplateBuilder.url(ApiConfig.API_URL)
+    public PaginationResponse<BlockResponse> retrieve(String blockId, BlockRequest blockRequest) {
+        return (PaginationResponse<BlockResponse>) restTemplateBuilder.url(ApiConfig.API_URL)
                 .method(HttpMethod.GET)
                 .path(BlockApi.RETRIEVE)
                 .pathExpend(blockId)
                 .contentType(defaultContentType)
                 .headers(defaultHeaders)
-                .response(BlockResponse.class)
+                .request(blockRequest)
+                .response(new ParameterizedTypeReference<PaginationResponse<BlockResponse>>() {})
                 .build()
                 .getBody();
     }

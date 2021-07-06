@@ -3,6 +3,7 @@ package com.lafin.tiltheend.thirdparty.notion;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lafin.tiltheend.library.resttemplate.JsonUtil;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.PageParent;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.PageRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.PageResponse;
@@ -23,11 +24,14 @@ class NotionClientTest {
     @Autowired
     private NotionClient notionClient;
 
+    @Autowired
+    private JsonUtil jsonUtil;
+
     @Test
     void retrievePageTest() {
-        var result = notionClient.getPage().retrieve("851676d8c99042d4b46ed0c44334188a").toString();
+        var result = notionClient.getPage().retrieveRaw("851676d8c99042d4b46ed0c44334188a").toString();
 
-        System.out.println(result);
+        System.out.println(jsonUtil.objectToJson(result));
     }
 
     @Test
@@ -37,7 +41,7 @@ class NotionClientTest {
         try {
             ClassPathResource resource = new ClassPathResource("json/create_page.json");
 
-            PageRequest<PageParent> pageRequest = objectMapper.readValue(resource.getFile(), new TypeReference<PageRequest<PageParent>>(){});
+            PageRequest pageRequest = objectMapper.readValue(resource.getFile(), PageRequest.class);
 
             var result = notionClient.getPage().createFromPage(pageRequest);
 
@@ -48,13 +52,10 @@ class NotionClientTest {
     }
 
     @Test
-    void retrieveBlockTest() throws JsonProcessingException {
-        var result = notionClient.getBlock().retrieveRaw("851676d8c99042d4b46ed0c44334188a");
+    void retrieveBlockTest() {
+//        var result = notionClient.getBlock().retrieveRaw("851676d8c99042d4b46ed0c44334188a");
+        var result = notionClient.getBlock().retrieve("851676d8c99042d4b46ed0c44334188a", null);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        var json = objectMapper.writeValueAsString(result);
-
-        System.out.println(result);
-        System.out.println(json);
+        System.out.println(jsonUtil.objectToJson(result));
     }
 }

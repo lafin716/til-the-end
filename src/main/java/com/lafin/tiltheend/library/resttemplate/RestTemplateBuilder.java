@@ -195,6 +195,11 @@ public class RestTemplateBuilder {
     }
 
     private ResponseEntity<?> execute() {
+
+        if (Objects.nonNull(genericResponse)) {
+            return new RestTemplate().exchange(uri, method, requestEntity, genericResponse);
+        }
+
         return new RestTemplate().exchange(uri, method, requestEntity, response);
     }
 

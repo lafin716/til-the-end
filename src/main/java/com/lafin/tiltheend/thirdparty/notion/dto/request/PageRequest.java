@@ -15,9 +15,9 @@ import java.util.Map;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PageRequest<P extends Parent> implements Request {
+public class PageRequest implements Request {
 
-    private P parent;
+    private DatabaseParent parent;
     
     private Map<String, Object> properties;
 
