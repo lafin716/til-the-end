@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -127,6 +128,8 @@ public class RestTemplateBuilder {
             createRequestForPut();
         } else if (method == HttpMethod.DELETE) {
             createRequestForDelete();
+        } else if (method == HttpMethod.PATCH) {
+            createRequestForPatch();
         } else {
             return;
         }
@@ -194,13 +197,26 @@ public class RestTemplateBuilder {
                 .build();
     }
 
+    private void createRequestForPatch() {
+        this.uri = UriComponentsBuilder.fromUriString(url)
+                .path(path)
+                .encode()
+                .build()
+                .expand(pathExpend)
+                .toUri();
+
+        this.requestEntity = RequestEntity.patch(uri)
+                .headers(headers)
+                .body(request);
+    }
+
     private ResponseEntity<?> execute() {
 
         if (Objects.nonNull(genericResponse)) {
-            return new RestTemplate().exchange(uri, method, requestEntity, genericResponse);
+            return new RestTemplate(new HttpComponentsClientHttpRequestFactory()).exchange(uri, method, requestEntity, genericResponse);
         }
 
-        return new RestTemplate().exchange(uri, method, requestEntity, response);
+        return new RestTemplate(new HttpComponentsClientHttpRequestFactory()).exchange(uri, method, requestEntity, response);
     }
 
     private void checkHttpHeader() {

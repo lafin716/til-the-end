@@ -62,7 +62,7 @@ public class BlockService extends NotionService {
      */
     public BlockResponse append(String blockId, BlockRequest blockRequest) {
         return (BlockResponse) restTemplateBuilder.url(ApiConfig.API_URL)
-                .method(HttpMethod.POST)
+                .method(HttpMethod.PATCH)
                 .path(BlockApi.APPEND)
                 .pathExpend(blockId)
                 .contentType(defaultContentType)
