@@ -13,13 +13,15 @@ import lombok.*;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PageResponse<P extends Parent> implements Response {
+public class BlockResponse<P extends Parent> implements Response {
 
-    private String url;
-    private boolean archived;
-    private P parent;
-    private String lastEditedTime;
-    private String createdTime;
-    private String id;
     private String object;
+    private String id;
+    private String type;
+    private String createdTime;
+    private String lastEditedTime;
+    private boolean hasChildren;
+
+
+
 }

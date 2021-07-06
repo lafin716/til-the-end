@@ -1,17 +1,15 @@
 package com.lafin.tiltheend.thirdparty.notion.service;
 
-import com.lafin.tiltheend.library.resttemplate.RestTemplateBuilder;
 import com.lafin.tiltheend.thirdparty.notion.config.ApiConfig;
+import com.lafin.tiltheend.thirdparty.notion.config.ApiType;
 import com.lafin.tiltheend.thirdparty.notion.constant.DatabaseApi;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.DatabaseResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DatabaseService extends BaseService {
+public class DatabaseService extends NotionService {
 
     /**
      * Retrieves a Database object using the ID specified.
@@ -66,5 +64,10 @@ public class DatabaseService extends BaseService {
                 .response(DatabaseResponse.class)
                 .build()
                 .getBody();
+    }
+
+    @Override
+    public boolean support(Class<?> clazz) {
+        return this.getClass().getName().equals(clazz.getName());
     }
 }

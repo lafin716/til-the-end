@@ -1,25 +1,31 @@
 package com.lafin.tiltheend.thirdparty.notion.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.lafin.tiltheend.library.resttemplate.Request;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class PageRequest implements Request {
+import java.util.List;
+import java.util.Map;
 
-    private String pageId;
+@Data
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class PageRequest<P extends Parent> implements Request {
+
+    private P parent;
+    
+    private Map<String, Object> properties;
+
+    private List<BlockRequest> children;
 
     @Override
     public MultiValueMap toQueryParameters() {
         var map = new LinkedMultiValueMap<String, String>();
-        map.add("page_id", pageId);
 
         return map;
     }

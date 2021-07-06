@@ -1,13 +1,22 @@
 package com.lafin.tiltheend.thirdparty.notion.connect;
 
-import com.lafin.tiltheend.library.resttemplate.RestTemplateBuilder;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import com.lafin.tiltheend.thirdparty.notion.config.ApiType;
+import com.lafin.tiltheend.thirdparty.notion.service.NotionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@Service
 public class NotionServiceProvider {
 
-    public void test() {
-//        restTemplateBuilder.
+    @Autowired
+    private List<NotionService> notionServices;
+
+    public NotionService getService(Class<?> clazz) {
+        return notionServices.stream()
+                .filter(it -> it.support(clazz))
+                .findFirst()
+                .orElseThrow(() -> new NullPointerException());
     }
 }

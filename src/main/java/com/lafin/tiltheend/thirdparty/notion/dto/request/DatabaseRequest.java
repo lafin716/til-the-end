@@ -1,6 +1,9 @@
 package com.lafin.tiltheend.thirdparty.notion.dto.request;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.lafin.tiltheend.library.resttemplate.Request;
 import lombok.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -11,8 +14,8 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DatabaseRequest implements Request {
     private String startCursor = "";
     private int pageSize;

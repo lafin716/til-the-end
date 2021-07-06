@@ -101,6 +101,10 @@ public class RestTemplateBuilder {
         return this;
     }
 
+    public ResponseEntity<?> getResponseEntity() {
+        return this.responseEntity;
+    }
+
     public Object getBody() {
         return this.responseEntity.getBody();
     }
@@ -123,7 +127,7 @@ public class RestTemplateBuilder {
     }
 
     private void createRequestForGet() {
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(url)
+        var uriComponentsBuilder = UriComponentsBuilder.fromUriString(url)
                 .path(path);
 
         if (request != null) {
@@ -140,12 +144,16 @@ public class RestTemplateBuilder {
     }
 
     private void createRequestForPost() {
-        this.uri = UriComponentsBuilder.fromUriString(url)
+        var uriComponentsBuilder = UriComponentsBuilder.fromUriString(url)
                 .path(path)
                 .encode()
-                .build()
-                .expand(pathExpend)
-                .toUri();
+                .build();
+
+        if (Objects.nonNull(pathExpend)) {
+            uriComponentsBuilder.expand(pathExpend);
+        }
+
+        this.uri = uriComponentsBuilder.toUri();
 
         this.requestEntity = RequestEntity.post(uri)
                 .headers(headers)
