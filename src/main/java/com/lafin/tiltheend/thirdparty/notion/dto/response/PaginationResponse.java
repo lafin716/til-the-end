@@ -13,10 +13,9 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class) 
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PaginationResponse<T> implements Response {
 
     private boolean hasMore;

@@ -8,6 +8,7 @@ import com.lafin.tiltheend.library.resttemplate.Request;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.util.MultiValueMap;
 
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DatabaseRequest extends PaginationRequest implements Request {
@@ -26,6 +28,7 @@ public class DatabaseRequest extends PaginationRequest implements Request {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @ToString
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Filter {
@@ -39,6 +42,7 @@ public class DatabaseRequest extends PaginationRequest implements Request {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @ToString
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Sort {

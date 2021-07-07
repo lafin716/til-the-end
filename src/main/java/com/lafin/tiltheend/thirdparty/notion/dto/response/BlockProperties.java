@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
 @NoArgsConstructor
+@ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlockProperties {
@@ -18,6 +20,7 @@ public class BlockProperties {
 
     @Data
     @NoArgsConstructor
+    @ToString
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Properties {
@@ -34,18 +37,30 @@ public class BlockProperties {
 
         @Data
         @NoArgsConstructor
+        @ToString
         @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
         @JsonInclude(JsonInclude.Include.NON_NULL)
         public static class Text {
 
             private String content;
 
-            private String link;
+            private Link link;
+
+            @Data
+            @NoArgsConstructor
+            @ToString
+            @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            public static class Link {
+
+                private String url;
+            }
 
         }
 
         @Data
         @NoArgsConstructor
+        @ToString
         @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
         @JsonInclude(JsonInclude.Include.NON_NULL)
         public static class Annotations {
