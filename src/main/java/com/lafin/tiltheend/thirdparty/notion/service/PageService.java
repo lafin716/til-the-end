@@ -1,19 +1,11 @@
 package com.lafin.tiltheend.thirdparty.notion.service;
 
 import com.lafin.tiltheend.thirdparty.notion.config.ApiConfig;
-import com.lafin.tiltheend.thirdparty.notion.config.ApiType;
-import com.lafin.tiltheend.thirdparty.notion.constant.DatabaseApi;
 import com.lafin.tiltheend.thirdparty.notion.constant.PageApi;
-import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseParent;
-import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseRequest;
-import com.lafin.tiltheend.thirdparty.notion.dto.request.PageParent;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.PageRequest;
-import com.lafin.tiltheend.thirdparty.notion.dto.response.DatabaseResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.PageResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

@@ -1,18 +1,10 @@
 package com.lafin.tiltheend.thirdparty.notion.service;
 
-import com.lafin.tiltheend.library.resttemplate.Response;
 import com.lafin.tiltheend.library.resttemplate.RestTemplateBuilder;
-import com.lafin.tiltheend.thirdparty.notion.config.NotionConfiguration;
-import com.lafin.tiltheend.thirdparty.notion.dto.request.DatabaseRequest;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service

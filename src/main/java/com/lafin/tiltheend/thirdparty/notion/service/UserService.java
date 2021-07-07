@@ -1,12 +1,9 @@
 package com.lafin.tiltheend.thirdparty.notion.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.lafin.tiltheend.thirdparty.notion.config.ApiConfig;
 import com.lafin.tiltheend.thirdparty.notion.constant.BlockApi;
 import com.lafin.tiltheend.thirdparty.notion.constant.UserApi;
-import com.lafin.tiltheend.thirdparty.notion.dto.request.BlockRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.UserRequest;
-import com.lafin.tiltheend.thirdparty.notion.dto.response.BlockResponse;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.UserResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,7 +11,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 @Slf4j
