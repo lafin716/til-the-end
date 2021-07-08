@@ -28,6 +28,15 @@ class BlockServiceTest {
 
     @Test
     void retrieveBlockTest() {
+        var result = blockService.retrieve("851676d8c99042d4b46ed0c44334188a", null);
+
+        var text = jsonUtil.objectToJson(result);
+
+        System.out.println(text);
+    }
+
+    @Test
+    void retrieveBlockRawTest() {
         var result = blockService.retrieveRaw("851676d8c99042d4b46ed0c44334188a");
 
         var text = jsonUtil.objectToJson(result);
@@ -50,8 +59,8 @@ class BlockServiceTest {
         text2.setContent("test");
         blockText.setText(text2);
         textList.add(blockText);
-        blockProperty.setText(textList);
-        newBlockProperties.setHeading_2(blockProperty);
+//        blockProperty.setText(textList);
+//        newBlockProperties.setHeading_2(blockProperty);
         list.add(newBlockProperties);
         newBlock.setChildren(list);
 

@@ -16,7 +16,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BlockProperties {
 
-    private List<Properties> text;
+    private List<RichTextResponse> text;
 
     @Data
     @NoArgsConstructor
@@ -44,39 +44,9 @@ public class BlockProperties {
 
             private String content;
 
-            private Link link;
-
-            @Data
-            @NoArgsConstructor
-            @ToString
-            @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-            @JsonInclude(JsonInclude.Include.NON_NULL)
-            public static class Link {
-
-                private String url;
-            }
+            private LinkResponse link;
 
         }
 
-        @Data
-        @NoArgsConstructor
-        @ToString
-        @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-        @JsonInclude(JsonInclude.Include.NON_NULL)
-        public static class Annotations {
-
-            private boolean bold;
-
-            private boolean italic;
-
-            private boolean strikethrough;
-
-            private boolean underline;
-
-            private boolean code;
-
-            private String color;
-
-        }
     }
 }
