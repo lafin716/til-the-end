@@ -9,6 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -110,6 +111,10 @@ public class RestTemplateBuilder {
         return this;
     }
 
+    public String getUrl() {
+        return this.uri.toString();
+    }
+
     public ResponseEntity<?> getResponseEntity() {
         return this.responseEntity;
     }
@@ -145,10 +150,12 @@ public class RestTemplateBuilder {
             uriComponentsBuilder.queryParams(request.toQueryParameters());
         }
 
-        this.uri = uriComponentsBuilder.encode()
-                .build()
-                .expand(pathExpend)
-                .toUri();
+        var uriComponents = uriComponentsBuilder.encode().build();
+        if (!ObjectUtils.isEmpty(pathExpend)) {
+            uriComponents = uriComponents.expand(pathExpend);
+        }
+
+        this.uri = uriComponents.toUri();
         this.requestEntity = RequestEntity.get(uri)
                 .headers(headers)
                 .build();

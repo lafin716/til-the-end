@@ -4,3 +4,8 @@ spring:
 notion:
   version: 2021-05-13
   api_token: secret_77baON5R7Zv6wJ46jt4AWWneXNlRB4PQKpaf0RvNA0S
+github:
+  api_token: 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
+  client_id: 30061f4f421898afcf97
+  client_secret: a719a548c1382210c0372d7b30a9ff69e90a19cf
+  redirect_url: http://localhost:8080/api/github/callback
