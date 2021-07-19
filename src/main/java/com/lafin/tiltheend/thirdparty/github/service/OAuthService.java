@@ -9,13 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
-@RequiredArgsConstructor
 public class OAuthService extends GithubService {
 
-    private final OAuthRequest oAuthRequest;
+    @Resource(name = "clientId")
+    private String clientId;
 
-    public String authorize() {
+    @Resource(name = "clientSecret")
+    private String clientSecret;
+
+    @Resource(name = "redirectUrl")
+    private String redirectUrl;
+
+    public String getAuthorizeUrl() {
+        OAuthRequest oAuthRequest = new OAuthRequest();
+        oAuthRequest.setClientId(clientId);
+        oAuthRequest.setClientSecret(clientSecret);
+        oAuthRequest.setRedirectUrl(redirectUrl);
+        oAuthRequest.setScope("user,public_repo");
+
         String result = (String) restTemplateBuilder.url(GithubApi.AUTH_URL)
                 .method(HttpMethod.GET)
                 .path(AuthApi.AUTHORIZE)
@@ -29,9 +43,13 @@ public class OAuthService extends GithubService {
     }
 
     public AccessTokenResponse getAccessToken(String code) {
+        OAuthRequest oAuthRequest = new OAuthRequest();
+        oAuthRequest.setClientId(clientId);
+        oAuthRequest.setClientSecret(clientSecret);
         oAuthRequest.setCode(code);
+
         var result = (AccessTokenResponse) restTemplateBuilder.url(GithubApi.AUTH_URL)
-                .method(HttpMethod.GET)
+                .method(HttpMethod.POST)
                 .path(AuthApi.ACCESS_TOKEN)
                 .contentType(defaultContentType)
                 .headers(defaultHeaders())
@@ -39,6 +57,24 @@ public class OAuthService extends GithubService {
                 .response(AccessTokenResponse.class)
                 .build()
                 .getBody();
+
+        return result;
+    }
+
+    public String getAccessTokenUrl(String code) {
+        OAuthRequest oAuthRequest = new OAuthRequest();
+        oAuthRequest.setClientId(clientId);
+        oAuthRequest.setClientSecret(clientSecret);
+        oAuthRequest.setCode(code);
+
+        var result = (String) restTemplateBuilder.url(GithubApi.AUTH_URL)
+                .method(HttpMethod.POST)
+                .path(AuthApi.ACCESS_TOKEN)
+                .contentType(defaultContentType)
+                .headers(defaultHeaders())
+                .request(oAuthRequest)
+                .response(String.class)
+                .getUrl();
 
         return result;
     }

@@ -42,6 +42,7 @@ public class CommitFileRequest implements Request {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
+    @Builder
     @ToString
     @EqualsAndHashCode
     public static class Author {

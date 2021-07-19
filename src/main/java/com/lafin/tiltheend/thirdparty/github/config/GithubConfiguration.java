@@ -19,6 +19,9 @@ public class GithubConfiguration {
     @Value("${github.redirect_url}")
     public String redirectUrl;
 
+    @Value("${github.api_token}")
+    public String personalAccessToken;
+
     @Bean(name = "clientId")
     public String getClientId() {
         return clientId;
@@ -32,5 +35,10 @@ public class GithubConfiguration {
     @Bean(name = "redirectUrl")
     public String getRedirectUrl() {
         return redirectUrl;
+    }
+
+    @Bean(name = "personalAccessToken")
+    public String getPersonalAccessToken() {
+        return personalAccessToken;
     }
 }

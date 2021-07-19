@@ -25,9 +25,16 @@ public abstract class GithubService implements Supportable {
         };
     }
 
+    public Map<String, String> getTokenHeader(String accessToken) {
+        var headers = defaultHeaders();
+        headers.put("Authorization", "token " + accessToken);
+
+        return headers;
+    }
+
     public Map<String, String> getTokenHeaders(AccessTokenResponse accessToken) {
         var headers = defaultHeaders();
-        headers.put("Authorization", accessToken.getAccessToken());
+        headers.put("Authorization", "token " + accessToken.getAccessToken());
 
         return headers;
     }

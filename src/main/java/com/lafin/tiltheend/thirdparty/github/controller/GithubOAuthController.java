@@ -19,7 +19,7 @@ public class GithubOAuthController {
 
     @GetMapping("/authorize")
     public String authorize() {
-        return githubClient.getOAuth().authorize();
+        return "redirect:" + githubClient.getOAuth().getAuthorizeUrl();
     }
 
     @GetMapping("/callback")

@@ -6,6 +6,7 @@ import com.lafin.tiltheend.thirdparty.github.dto.response.AccessTokenResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Base64Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,20 +18,31 @@ class RepositoryServiceTest {
 
     @Test
     void commitTest() {
-        AccessTokenResponse accessTokenResponse = new AccessTokenResponse();
-        accessTokenResponse.setAccessToken("");
-
         CommitPathRequest commitPathRequest = new CommitPathRequest();
         commitPathRequest.setOwner("lafin716");
         commitPathRequest.setRepo("knowledge_bank");
-        commitPathRequest.setPath("src/com/lafin/knowledge/til/2021");
+        commitPathRequest.setPath("src/com/lafin/knowledge/til/2021/0719.md");
 
         CommitFileRequest commitFileRequest = new CommitFileRequest();
-        commitFileRequest.setBranch("develop");
-        commitFileRequest.setMessage("docs: TIL 추가 테스트 by API");
-        commitFileRequest.setContent("test api taemi");
+        CommitFileRequest.Author author = new CommitFileRequest.Author();
+        author.setName("lafin716");
+        author.setEmail("lafin716@gmail.com");
 
-        var result = repositoryService.commit(accessTokenResponse, commitPathRequest, commitFileRequest);
+        CommitFileRequest.Committer committer = new CommitFileRequest.Committer();
+        committer.setName("lafin716");
+        committer.setEmail("lafin716@gmail.com");
+
+        String content = Base64Utils.encodeToString("testtest".getBytes());
+
+        System.out.println(content);
+
+        commitFileRequest.setAuthor(author);
+        commitFileRequest.setCommitter(committer);
+        commitFileRequest.setBranch("main");
+        commitFileRequest.setMessage("docs: TIL 추가 테스트 by API");
+        commitFileRequest.setContent(content);
+
+        var result = repositoryService.commit(commitPathRequest, commitFileRequest);
 
         System.out.println(result);
     }
