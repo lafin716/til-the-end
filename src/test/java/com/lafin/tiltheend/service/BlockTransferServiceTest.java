@@ -14,7 +14,7 @@ class BlockTransferServiceTest {
 
     @Test
     void getList() {
-        var result = blockTransferService.getBlockListToString("e91bbe13863d44f79828f3586d52c05f", null);
+        var result = blockTransferService.getBlockListToString("0bad843e1e0141fab20d9b002b2cab08", null);
 
         System.out.println(result);
     }

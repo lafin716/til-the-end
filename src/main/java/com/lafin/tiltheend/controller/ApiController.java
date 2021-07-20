@@ -1,6 +1,7 @@
 package com.lafin.tiltheend.controller;
 
 
+import com.lafin.tiltheend.dto.BlockDto;
 import com.lafin.tiltheend.service.BlockTransferService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,7 @@ public class ApiController {
 //    }
 
     @GetMapping("/blocks/{pageId}")
-    public List<String> blocks(@PathVariable(required = true) String pageId) {
+    public List<BlockDto> blocks(@PathVariable(required = true) String pageId) {
         return blockTransferService.getBlockListToString(pageId, null);
-//        return notionClient.getBlock().retrieve(pageId, null);
     }
 }
