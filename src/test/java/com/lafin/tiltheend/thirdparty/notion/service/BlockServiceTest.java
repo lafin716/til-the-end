@@ -33,7 +33,7 @@ class BlockServiceTest {
 
     @Test
     void retrieveBlockRawTest() {
-        var result = blockService.retrieveRaw("851676d8c99042d4b46ed0c44334188a");
+        var result = blockService.retrieveRaw("0bad843e1e0141fab20d9b002b2cab08");
 
         var text = jsonUtil.objectToJson(result);
 
