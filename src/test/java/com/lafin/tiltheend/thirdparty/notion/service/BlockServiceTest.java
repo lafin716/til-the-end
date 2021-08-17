@@ -3,7 +3,6 @@ package com.lafin.tiltheend.thirdparty.notion.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lafin.tiltheend.library.resttemplate.JsonUtil;
 import com.lafin.tiltheend.thirdparty.notion.dto.request.BlockRequest;
-import com.lafin.tiltheend.thirdparty.notion.dto.request.PageRequest;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.BlockProperties;
 import com.lafin.tiltheend.thirdparty.notion.dto.response.BlockResponse;
 import org.junit.jupiter.api.Test;
@@ -13,9 +12,6 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BlockServiceTest {
