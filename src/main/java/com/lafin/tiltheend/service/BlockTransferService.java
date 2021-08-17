@@ -12,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +72,7 @@ public class BlockTransferService {
                 block.setText(response.getChild().getText().get(0).getPlainText());
             } else if (block.getType() == NotionBlockType.CHILD_PAGE) {
                 block.setText(getPageTitle(response.getId()));
-                block.setUrl(notionClient.getBlock().getHomeUrl() + response.getId());
+                block.setUrl(notionClient.getBlock().getHomeUrl() + response.getId().replaceAll("-", ""));
             }
 
             blocks.append(MarkDownUtils.translate(block) + "\n");
@@ -80,10 +83,13 @@ public class BlockTransferService {
 
     // 노션 페이지 항목을 읽어온 뒤 Github에 새 페이지 생성하여 커밋 처리
     public String postGithubFromNotion(String pageId) {
-        String pageTitle = getPageTitle(pageId);
-        var path = pageTitle + ".md";
+        LocalDate today = LocalDate.now();
+        String year = today.format(DateTimeFormatter.ofPattern("yyyy"));
+        String date = today.format(DateTimeFormatter.ofPattern("MMdd"));
+        String pageTitle = "#" + getPageTitle(pageId);
+        var path = year + "/" + date + ".md";
         var title = "docs : Add TIL " + pageTitle + " At " + LocalDateTime.now().toString();
-        var content = getBlocksToString(pageId, null);
+        var content = pageTitle + getBlocksToString(pageId, null);
         var result = githubClient.getRepository().preparedCommit(path, title, content);
 
         return result;

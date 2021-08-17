@@ -36,7 +36,7 @@ public class MarkDownUtils {
             result.append(" ");
             result.append(block.getText());
         }
-
+        result.append("<br/>");
         return result.toString();
     }
 }
