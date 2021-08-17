@@ -14,7 +14,14 @@ class BlockTransferServiceTest {
 
     @Test
     void getList() {
-        var result = blockTransferService.getBlockListToString("0bad843e1e0141fab20d9b002b2cab08", null);
+        var result = blockTransferService.getBlockListToString("851676d8c99042d4b46ed0c44334188a", null);
+
+        System.out.println(result);
+    }
+
+    @Test
+    void postToGithubTest() {
+        var result = blockTransferService.postGithubFromNotion("851676d8c99042d4b46ed0c44334188a");
 
         System.out.println(result);
     }

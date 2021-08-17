@@ -4,10 +4,7 @@ package com.lafin.tiltheend.controller;
 import com.lafin.tiltheend.dto.BlockDto;
 import com.lafin.tiltheend.service.BlockTransferService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +21,12 @@ public class ApiController {
 //    }
 
     @GetMapping("/blocks/{pageId}")
-    public List<BlockDto> blocks(@PathVariable(required = true) String pageId) {
+    public List<String> getBlockText(@PathVariable(required = true) String pageId) {
         return blockTransferService.getBlockListToString(pageId, null);
+    }
+
+    @PostMapping("/posting/{pageId}")
+    public String postToGithub(@PathVariable(required = true) String pageId) {
+        return blockTransferService.postGithubFromNotion(pageId);
     }
 }

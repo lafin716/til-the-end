@@ -7,6 +7,7 @@ import org.springframework.util.MultiValueMap;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(access = AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode
 public class CommitPathRequest implements Request {

@@ -1,6 +1,7 @@
 package com.lafin.tiltheend.dto;
 
 
+import com.lafin.tiltheend.constant.NotionBlockType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,10 @@ import lombok.ToString;
 @ToString
 public class BlockDto {
 
-    private String type;
+    private String id;
 
-    private String text;
+    private NotionBlockType type = NotionBlockType.PARAGRAPH;
+
+    private String text = "";
 
 }
