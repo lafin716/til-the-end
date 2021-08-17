@@ -16,6 +16,22 @@ public class NotionConfiguration {
     @Value("${notion.version}")
     public String version;
 
+    @Value("${notion.home}")
+    public String home;
+
+    @Value("${notion.owner}")
+    public String owner;
+
+    @Bean(name = "notionHome")
+    public String getNotionHome() {
+        return home;
+    }
+
+    @Bean(name = "notionOwner")
+    public String getNotionOwner() {
+        return owner;
+    }
+
     @Bean
     public Map<String, String> defaultHeaders() {
         return new HashMap<>(){

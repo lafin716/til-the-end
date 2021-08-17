@@ -14,9 +14,11 @@ public class MarkDownUtils {
             put(NotionBlockType.HEADING_2, "##");
             put(NotionBlockType.HEADING_3, "###");
             put(NotionBlockType.BULLETED_LIST_ITEM, "-");
-            put(NotionBlockType.TOGGLE, ">");
-            put(NotionBlockType.TO_DO, "[*]");
+            put(NotionBlockType.NUMBERED_LIST_ITEM, "-");
+            put(NotionBlockType.TOGGLE, "<details><summery>%s</summery>%s</details>");
+            put(NotionBlockType.TO_DO, "- [ ]");
             put(NotionBlockType.CHILD_PAGE, "[%s](%s)");
+            put(NotionBlockType.UNSUPPORTED, "");
             put(NotionBlockType.PARAGRAPH, "");
         }
     };
@@ -26,6 +28,8 @@ public class MarkDownUtils {
 
         // child_page 인 경우 링크 형식을 맞춰서 치환
         if (block.getType() == NotionBlockType.CHILD_PAGE) {
+            result.append(String.format(keywords.get(block.getType()), block.getText(), block.getUrl()));
+        } else if (block.getType() == NotionBlockType.TOGGLE) {
             result.append(String.format(keywords.get(block.getType()), block.getText(), block.getId()));
         } else {
             result.append(keywords.get(block.getType()));

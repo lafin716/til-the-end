@@ -8,7 +8,13 @@ import javax.annotation.Resource;
 import java.util.Map;
 
 @Service
-public abstract class NotionService implements Supportable{
+public abstract class NotionService implements Supportable {
+
+    @Resource(name = "notionHome")
+    public String notionHome;
+
+    @Resource(name = "notionOwner")
+    public String notionOwner;
 
     @Resource(name = "defaultHeaders")
     public Map<String, String> defaultHeaders;
@@ -16,6 +22,15 @@ public abstract class NotionService implements Supportable{
     public RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
 
     public MediaType defaultContentType = MediaType.APPLICATION_JSON;
+
+    public String getHomeUrl() {
+        StringBuilder url = new StringBuilder();
+        url.append(notionHome);
+        url.append(notionOwner);
+        url.append("/");
+
+        return url.toString();
+    }
 //
 //    public abstract Response retrieve(String id);
 //

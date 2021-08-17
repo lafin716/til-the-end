@@ -19,4 +19,6 @@ public class BlockDto {
 
     private String text = "";
 
+    private String url = "";
+
 }

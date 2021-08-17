@@ -9,9 +9,11 @@ public enum NotionBlockType {
     HEADING_2,
     HEADING_3,
     BULLETED_LIST_ITEM,
+    NUMBERED_LIST_ITEM,
     CHILD_PAGE,
     TO_DO,
     TOGGLE,
+    UNSUPPORTED,
     PARAGRAPH;
 
     @JsonCreator

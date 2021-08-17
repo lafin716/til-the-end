@@ -15,8 +15,18 @@ class BlockTransferServiceTest {
     @Test
     void getList() {
         var result = blockTransferService.getBlockListToString("851676d8c99042d4b46ed0c44334188a", null);
-
         System.out.println(result);
+    }
+
+    @Test
+    void getText() {
+        var result = blockTransferService.getBlocksToString("851676d8c99042d4b46ed0c44334188a", null);
+        System.out.println(result);
+    }
+
+    @Test
+    void getPageTitle() {
+        System.out.println(blockTransferService.getPageTitle("fcdc1fde-6313-4c64-a3a3-cb65cad11555"));
     }
 
     @Test
